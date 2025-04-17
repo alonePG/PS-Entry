@@ -103,6 +103,7 @@
       <button onclick="trySyncOffline()" class="btn btn-sm btn-outline-dark mt-1">📤 ซิงค์ทันที</button>
     </div>
   </div>
+
 <script>
   const SHEET_API_URL = "https://script.google.com/macros/s/AKfycby_uIYRgKMVaystvuLQbWxRtiWWJrbUIFA7KDjpyFYQv3N6erfjeqnB0hv6dOw4dwYN/exec";
   const RANGER_NAME = "แพ็ค";
@@ -167,6 +168,7 @@
     const note = document.getElementById("note").value.trim();
     const skip = skipPhoto.checked;
     const reason = skipReason.value.trim();
+    const timein = new Date().toISOString();
 
     if (!plate || !house || !purposeVal) {
       alert("กรุณากรอกข้อมูลให้ครบ");
@@ -182,12 +184,16 @@
     statusMsg.innerHTML = `<div class="alert alert-info">📤 กำลังบันทึก...</div>`;
 
     const payload = {
-      plate, house, purpose: purposeVal, note,
-      ranger: RANGER_NAME,
-      skipPhoto: skip,
-      skipReason: reason,
-      imgID: "", // ไม่บันทึกภาพใน offline
-      imgCar: ""
+      plate,
+      house,
+      purpose: purposeVal,
+      note,
+      guard: RANGER_NAME,
+      skip,
+      skip_reason: reason,
+      timein,
+      id_photo_base64: "",
+      entry_photo_base64: ""
     };
 
     if (navigator.onLine) {
