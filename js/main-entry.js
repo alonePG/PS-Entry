@@ -19,12 +19,11 @@ window.addEventListener("DOMContentLoaded", async () => {
   });
   
   /**
-   * โหลดรายชื่อบ้านจาก mock (หรือ API จริงภายหลัง)
+   * โหลดรายชื่อบ้าน (mock สำหรับตอนนี้)
    */
   async function populateHouseDropdown() {
     const houseSelect = document.getElementById("houseNo");
     const houses = ["88/1", "88/2", "88/3", "88/4", "99/1", "99/2"];
-  
     houseSelect.innerHTML = houses.map(h => `<option value="${h}">${h}</option>`).join("\n");
   }
   
@@ -70,19 +69,23 @@ window.addEventListener("DOMContentLoaded", async () => {
   
     return {
       plate,
-      houseNo,
+      house: houseNo,
       purpose,
       note,
-      imageBase64,         // รูปบัตร
-      vehicleImageBase64,  // รูปรถเข้า
-      timeIn,
+      file: imageBase64.replace(/^data:image\/\w+;base64,/, ""),
+      filename: `visitor-${plate}-${Date.now()}.jpg`,
+      imageformat: "jpeg",
+      vehicle: vehicleImageBase64.replace(/^data:image\/\w+;base64,/, ""),
+      vehicleFilename: `vehicle-${plate}-${Date.now()}.jpg`,
+      vehicleFormat: "jpeg",
       officerIn: officer,
+      timeIn,
       status: "อยู่ภายใน"
     };
   }
   
   /**
-   * แสดงภาพ preview จาก input[type="file"]
+   * แสดง preview ภาพจาก input[type="file"]
    */
   function previewPhoto(event, previewId) {
     const file = event.target.files[0];

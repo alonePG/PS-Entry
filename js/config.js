@@ -2,7 +2,7 @@
 
 const config = {
   // URL สำหรับเรียก backend (Google Apps Script Web App URL)
-  entryUrl: "https://script.google.com/macros/s/AKfycbwKbLCa-S5PG30htOmbgagukmIpqxbXlDfwZNLNsVP7Nbx7JoOBAzO6FBWNBvOD0U5cvw/exec",
+  entryUrl: "https://script.google.com/macros/s/AKfycbzGP312gwIAWmQ6Fx6t2ajZ1TjT1p1XBSrlWf4nbai3cI_1gnyHsu7IrYTWs95Yat7flA/exec",
   checkoutUrl: "https://script.google.com/macros/s/CHECKOUT_SCRIPT_ID/exec",
   houseListUrl: "https://script.google.com/macros/s/HOUSE_LIST_SCRIPT_ID/exec?action=houses",
 

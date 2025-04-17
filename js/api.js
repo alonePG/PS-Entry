@@ -1,44 +1,33 @@
-// api.js
+/**
+ * ส่งข้อมูลแบบ x-www-form-urlencoded ไปยัง Google Apps Script
+ * ใช้ได้กับ Web App ที่เปิดให้ Everyone access
+ * รองรับ CORS โดยไม่ต้องตั้งค่าเพิ่มเติม
+ */
 
 /**
- * ส่งข้อมูลแบบ POST ไปยัง Web App (Apps Script)
- * @param {string} url - URL ของ backend
- * @param {Object} payload - ข้อมูลที่ต้องการส่ง
- * @returns {Promise<Object>} - ผลลัพธ์จาก backend
+ * ส่งข้อมูล entry
+ * @param {string} url - URL ของ Web App (entryUrl)
+ * @param {Object} formDataObject - ข้อมูลที่รวบรวมจากแบบฟอร์ม
+ * @returns {Promise<string>} - ข้อความตอบกลับจาก server
  */
-async function postData(url, payload) {
-    try {
-      const res = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-  
-      if (!res.ok) {
-        throw new Error("Network response was not ok");
-      }
-  
-      return await res.json(); // ต้องให้ backend ตอบกลับ JSON
-    } catch (err) {
-      console.error("❌ postData error:", err);
-      throw err;
+export async function postData(url, formDataObject) {
+    const data = new URLSearchParams();
+    for (const [key, value] of Object.entries(formDataObject)) {
+      data.append(key, value);
     }
-  }
   
-  /**
-   * ดึงข้อมูลแบบ GET จาก endpoint
-   * ใช้สำหรับโหลดรายชื่อบ้าน หรืออื่น ๆ
-   * @param {string} url
-   * @returns {Promise<Object>}
-   */
-  async function getData(url) {
-    try {
-      const res = await fetch(url);
-      if (!res.ok) throw new Error("Network response was not ok");
-      return await res.json();
-    } catch (err) {
-      console.error("❌ getData error:", err);
-      throw err;
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: data.toString()
+    });
+  
+    if (!res.ok) {
+      throw new Error("ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้");
     }
+  
+    return await res.text(); // หรือ .json() ถ้า backend ส่ง JSON
   }
   
