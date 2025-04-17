@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>บันทึกรถเข้า - PS-Entry</title>
+  <link rel="icon" href="https://i.imgur.com/QEBYa5H.png" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <style>
+    body {
+      padding: 1rem;
+      background: #f5f5f5;
+    }
+    .preview-img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: contain;
+      margin-top: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h4 class="text-center mb-3">🚗 ระบบบันทึกรถเข้า - PS-Entry</h4>
+
+    <form id="form" autocomplete="off">
+      <!-- ทะเบียน -->
+      <div class="mb-2">
+        <label for="plate" class="form-label">เลขทะเบียนรถ</label>
+        <input type="text" id="plate" class="form-control" required />
+      </div>
+
+      <!-- บ้านเลขที่ -->
+      <div class="mb-2">
+        <label for="houseNo" class="form-label">บ้านเลขที่</label>
+        <select id="houseNo" class="form-select" required>
+          <option value="">-- กำลังโหลดรายชื่อบ้าน --</option>
+        </select>
+      </div>
+
+      <!-- วัตถุประสงค์ -->
+      <div class="mb-2">
+        <label for="purpose" class="form-label">วัตถุประสงค์</label>
+        <select id="purpose" class="form-select" required>
+          <option value="">-- เลือก --</option>
+          <option value="เยี่ยม">เยี่ยม</option>
+          <option value="ส่งของ">ส่งของ</option>
+          <option value="ช่าง/บริการ">ช่าง/บริการ</option>
+        </select>
+      </div>
+
+      <!-- หมายเหตุ -->
+      <div class="mb-2">
+        <label for="note" class="form-label">หมายเหตุ (ถ้ามี)</label>
+        <input type="text" id="note" class="form-control" />
+      </div>
+
+      <!-- แนบรูปบัตร -->
+      <div class="mb-2">
+        <label for="photo" class="form-label">แนบรูปบัตรผู้มาติดต่อ</label>
+        <input type="file" id="photo" class="form-control" accept="image/*" required />
+        <img id="previewImage" class="preview-img" />
+      </div>
+
+      <!-- แนบรูปรถเข้า -->
+      <div class="mb-2">
+        <label for="vehiclePhoto" class="form-label">แนบรูปรถเข้า (ถ้ามี)</label>
+        <input type="file" id="vehiclePhoto" class="form-control" accept="image/*" />
+        <img id="vehiclePreviewImage" class="preview-img" />
+      </div>
+
+      <!-- ปุ่มบันทึก -->
+      <button type="submit" id="submitBtn" class="btn btn-primary w-100 mt-3">บันทึก</button>
+    </form>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/main-entry.js"></script>
+</body>
+</html>
